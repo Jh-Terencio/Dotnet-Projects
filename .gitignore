@@ -1,0 +1,23 @@
+# Visual Studio
+.vs/
+
+# Build
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+
+# NuGet
+packages/
+*.nupkg
