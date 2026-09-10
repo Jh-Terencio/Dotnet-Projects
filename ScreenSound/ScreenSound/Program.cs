@@ -21,7 +21,21 @@ void ShowMenuOptions()
     Console.WriteLine("Type 2 to show all bands");
     Console.WriteLine("Type 3 to rate a band");
     Console.WriteLine("Type 4 to view a band average rating");
-    Console.WriteLine("Type 0 to exit"); 
+    Console.WriteLine("Type 0 to exit");
+    
+    Console.Write("\nPlease enter your choice: ");
+    string choice = Console.ReadLine()!;
+    int parsedChoice = int.Parse(choice);
+
+    if (choice == "0")
+    {
+        Console.WriteLine("Exiting the application. Goodbye!");
+        return;
+    }
+    else if (parsedChoice == 1)
+    {
+        Console.WriteLine("You chose option " + choice);
+    }
 }
 
 ShowWelcomeMessage();
