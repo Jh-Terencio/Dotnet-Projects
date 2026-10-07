@@ -1,8 +1,10 @@
 ﻿// Usually variables are declared in CamelCase
+using ScreenSound.Challanges;
+
 string welcomeMessage = "Welcome to Screen Sound!";
 
 // Usually methods are declared in PascalCase
-void ShowWelcomeMessage()
+void ShowLogo()
 {
     // This multiline string was generated using this site https://fsymbols.com/#google_vignette
     Console.WriteLine(@"
@@ -17,6 +19,7 @@ void ShowWelcomeMessage()
 
 void ShowMenuOptions()
 {
+    ShowLogo();
     Console.WriteLine("\nType 1 to register a band");
     Console.WriteLine("Type 2 to show all bands");
     Console.WriteLine("Type 3 to rate a band");
@@ -29,7 +32,7 @@ void ShowMenuOptions()
 
     switch (parsedChoice)
     { 
-        case 1: Console.WriteLine("You choose option " + parsedChoice); break;
+        case 1: RegisterBands(); break;
         case 2: Console.WriteLine("You choose option " + parsedChoice); break;
         case 3: Console.WriteLine("You choose option " + parsedChoice); break;
         case 4: Console.WriteLine("You choose option " + parsedChoice); break;
@@ -39,59 +42,20 @@ void ShowMenuOptions()
 
 }
 
-void ChallangeOne()
+void RegisterBands()
 {
-    Console.WriteLine("-------------------- Part 1 --------------------");
-    Console.Write("\nPlease enter the student average exams score: ");
-    int averageExamScore = int.Parse(Console.ReadLine()!);
-
-    if (averageExamScore >= 5)
-    {
-        Console.WriteLine("Average Exam Score is enough to be approved");
-    }
-
-    Console.WriteLine("-------------------- Part 2 --------------------");
-    string studentName = "Terêncio";
-    Console.WriteLine("Hello" + studentName);
-
-    Console.WriteLine("-------------------- Part 3 --------------------");
-    Console.Write("\nPlease enter a number: ");
-    int number = int.Parse(Console.ReadLine()!);
-    void SayNumberType(int number)
-    {
-        if (number < 0)
-        {
-            Console.WriteLine("The number is negative");
-        }
-        else if (number > 0)
-        {
-            Console.WriteLine("The number is positive");
-        }
-        else
-        {
-            Console.WriteLine("The number is zero");
-        }
-    }
-
-    SayNumberType(number);
-    
-    Console.WriteLine("-------------------- Part 4 --------------------");
-    Console.Write("\nPlease enter a number to see the the number position in a list: ");
-    int numberPosition = int.Parse(Console.ReadLine()!);
-    void SearchListPosition(int number)
-    {
-        List<int> list = new List<int>();
-        for (int i = 0; i < number + 1; i++)
-        {
-            list.Add(i*2);
-        }
-
-        Console.WriteLine(list[number]);
-    }
-
-    SearchListPosition(numberPosition);
+    Console.Clear();
+    Console.WriteLine("Register a new band");
+    Console.Write("Enter the band name: ");
+    string bandName = Console.ReadLine()!;
+    Console.WriteLine($"Band {bandName} registered successfully!");
+    Thread.Sleep(2000);
+    Console.Clear();
+    ShowMenuOptions();
 }
 
-ShowWelcomeMessage();
 ShowMenuOptions();
-ChallangeOne();
+
+// Desafios
+//ChallangeOne challangeOne = new ChallangeOne();
+//challangeOne.Challange();
