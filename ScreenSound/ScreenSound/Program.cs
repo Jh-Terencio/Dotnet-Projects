@@ -2,7 +2,7 @@
 using ScreenSound.Challanges;
 
 string welcomeMessage = "Welcome to Screen Sound!";
-List<string> bands = new List<string> { "The Strokes", "Alan Walker", "Imagine Dragons" };
+Dictionary<string, List<int>> bands = new Dictionary<string, List<int>>();
 ChallengeManager challengeManager = new ChallengeManager();
 
 // Usually methods are declared in PascalCase
@@ -57,28 +57,52 @@ void ShowMenuOptions()
 void RegisterBands()
 {
     Console.Clear();
-    Console.WriteLine("Register a new band");
+    ShowTitleOptions("Register a new band");
     Console.Write("Enter the band name: ");
     string bandName = Console.ReadLine()!;
-    bands.Add(bandName);
+
+    if (string.IsNullOrWhiteSpace(bandName))
+    {
+        Console.WriteLine("Band name cannot be empty. Please try again.");
+        Thread.Sleep(2000);
+        Console.Clear();
+        ShowMenuOptions();
+        return;
+    } else if (bands.ContainsKey(bandName))
+    {
+        Console.WriteLine($"Band {bandName} is already registered.");
+        Thread.Sleep(2000);
+        Console.Clear();
+        ShowMenuOptions();
+        return;
+    }
+
+    bands.Add(bandName, new List<int>());
     Console.WriteLine($"Band {bandName} registered successfully!");
     Thread.Sleep(2000);
     Console.Clear();
     ShowMenuOptions();
 }
-
 void ShowRegisteredBands()
 {
     Console.Clear();
-    Console.WriteLine("Registered bands:");
+    ShowTitleOptions("Registered bands");
     foreach (var band in bands)
     {
-        Console.WriteLine(band);
+        Console.WriteLine(band.Key);
     }
     Console.WriteLine("\nPress any key to return to the menu...");
     Console.ReadKey();
     Console.Clear();
     ShowMenuOptions();
+}
+void ShowTitleOptions(string title)
+{
+    int titleLength = title.Length;
+    string border = string.Empty.PadLeft(titleLength + 4, '=');
+    Console.WriteLine(border);
+    Console.WriteLine($"= {title} =");
+    Console.WriteLine(border);
 }
 
 ShowMenuOptions();
