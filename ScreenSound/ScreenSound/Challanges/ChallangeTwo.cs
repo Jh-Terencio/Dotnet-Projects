@@ -1,12 +1,12 @@
 ﻿using ScreenSound.Challanges.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ScreenSound.Challanges
 {
-    internal class ChallangeTwo : IChallange
+    public class ChallangeTwo : IChallange
     {
+        public string Name => "Challenge Two";
+        public string Description => "Float operations, lists and loops";
+
         public void Challange()
         {
             // Escrever uma função que a partir de dois números de ponto flutuante a e b exiba no console o resultado de suas quatro operações básicas (adição, subtração, divisão e multiplicação), utilizando interpolação de strings.

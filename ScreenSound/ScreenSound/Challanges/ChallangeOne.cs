@@ -4,6 +4,9 @@ namespace ScreenSound.Challanges
 {
     public class ChallangeOne : IChallange
     {
+        public string Name => "Challenge One";
+        public string Description => "Basic conditionals and list operations";
+
         public void Challange()
         {
             Console.WriteLine("-------------------- Part 1 --------------------");

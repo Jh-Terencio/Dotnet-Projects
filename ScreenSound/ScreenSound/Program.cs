@@ -3,6 +3,7 @@ using ScreenSound.Challanges;
 
 string welcomeMessage = "Welcome to Screen Sound!";
 List<string> bands = new List<string> { "The Strokes", "Alan Walker", "Imagine Dragons" };
+ChallengeManager challengeManager = new ChallengeManager();
 
 // Usually methods are declared in PascalCase
 void ShowLogo()
@@ -25,21 +26,29 @@ void ShowMenuOptions()
     Console.WriteLine("Type 2 to show all bands");
     Console.WriteLine("Type 3 to rate a band");
     Console.WriteLine("Type 4 to view a band average rating");
-    Console.WriteLine("Type 99 to view challanges");
+    Console.WriteLine("Type 5 to view challenges");
     Console.WriteLine("Type 0 to exit");
-    
+
     Console.Write("\nPlease enter your choice: ");
     string choice = Console.ReadLine()!;
-    int parsedChoice = int.Parse(choice);
+
+    if (!int.TryParse(choice, out int parsedChoice))
+    {
+        Console.WriteLine("Invalid input. Please enter a number.");
+        Thread.Sleep(2000);
+        Console.Clear();
+        ShowMenuOptions();
+        return;
+    }
 
     switch (parsedChoice)
-    { 
+    {
         case 1: RegisterBands(); break;
         case 2: ShowRegisteredBands(); break;
         case 3: Console.WriteLine("You choose option " + parsedChoice); break;
         case 4: Console.WriteLine("You choose option " + parsedChoice); break;
+        case 5: challengeManager.DisplayChallenges(); break;
         case 0: Console.WriteLine("You choose option " + parsedChoice); break;
-        case 99: DisplayChallanges(); break;
         default: Console.WriteLine("Invalid option"); break;
     }
 
@@ -73,34 +82,3 @@ void ShowRegisteredBands()
 }
 
 ShowMenuOptions();
-
-void DisplayChallanges()
-{
-    Console.Clear();
-    Console.WriteLine("Challanges:");
-    Console.WriteLine("1 - Challange One");
-    Console.WriteLine("2 - Challange Two");
-    Console.WriteLine("0 - Return to main menu");
-
-    Console.Write("\nPlease enter your choice: ");
-    string choice = Console.ReadLine()!;
-    int parsedChoice = int.Parse(choice);
-    switch (parsedChoice)
-    {
-        case 1:
-            ChallangeOne challangeOne = new ChallangeOne();
-            challangeOne.Challange();
-            break;
-        case 2:
-            ChallangeTwo challangeTwo = new ChallangeTwo();
-            challangeTwo.Challange();
-            break;
-        case 0: ShowMenuOptions(); break;
-        default:
-            Console.WriteLine("Invalid option");
-            Thread.Sleep(2000);
-            DisplayChallanges();
-            break;
-    }
-    ShowMenuOptions();
-}
