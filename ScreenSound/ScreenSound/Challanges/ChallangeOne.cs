@@ -17,6 +17,10 @@ namespace ScreenSound.Challanges
             {
                 Console.WriteLine("Average Exam Score is enough to be approved");
             }
+            else
+            {
+                Console.WriteLine("Average Exam Score is not enough to be approved");
+            }
 
             Console.WriteLine("-------------------- Part 2 --------------------");
             string studentName = "Terêncio";
