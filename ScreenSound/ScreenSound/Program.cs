@@ -45,8 +45,8 @@ void ShowMenuOptions()
     {
         case 1: RegisterBands(); break;
         case 2: ShowRegisteredBands(); break;
-        case 3: Console.WriteLine("You choose option " + parsedChoice); break;
-        case 4: Console.WriteLine("You choose option " + parsedChoice); break;
+        case 3: RateBand(); break;
+        case 4: ShowBandAverageRating(); break;
         case 5: challengeManager.DisplayChallenges(); break;
         case 0: Console.WriteLine("You choose option " + parsedChoice); break;
         default: Console.WriteLine("Invalid option"); break;
@@ -96,6 +96,84 @@ void ShowRegisteredBands()
     Console.Clear();
     ShowMenuOptions();
 }
+void RateBand()
+{
+    Console.Clear();
+    ShowTitleOptions("Rate a band");
+    Console.Write("Enter the band name: ");
+    string bandName = Console.ReadLine()!;
+    if(!bands.ContainsKey(bandName))
+    {
+        Console.WriteLine($"Band {bandName} is not registered.");
+        Console.WriteLine("\nBands available for rating:");
+        var sortedBands = bands.OrderBy(b => b.Key).ToList();
+        foreach (var band in sortedBands)
+        {
+            Console.WriteLine("- " + band.Key);
+        }
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
+        Console.Clear();
+        ShowMenuOptions();
+    }
+
+    Console.Write("Enter the rating (1 to 5): ");
+
+    int rating;
+    while (true)
+    {
+        Console.Write("Enter the rating (1 to 5): ");
+        string ratingInput = Console.ReadLine()!;
+
+        if (int.TryParse(ratingInput, out rating) && rating >= 1 && rating <= 5)
+            break;
+
+        Console.WriteLine("Invalid rating. Please enter a number between 1 and 5.");
+    }
+
+    bands[bandName].Add(rating);
+    Console.WriteLine($"Rating of {rating} added for band {bandName}!");    
+    Thread.Sleep(2000);
+    Console.Clear();
+    ShowMenuOptions();
+}
+void ShowBandAverageRating()
+{
+    Console.Clear();
+    ShowTitleOptions("View band average rating");
+    Console.Write("Enter the band name: ");
+    string bandName = Console.ReadLine()!;
+    if (!bands.ContainsKey(bandName))
+    {
+        Console.WriteLine($"Band {bandName} is not registered.");
+        Console.WriteLine("\nBands available for rating:");
+        var sortedBands = bands.OrderBy(b => b.Key).ToList();
+        foreach (var band in sortedBands)
+        {
+            Console.WriteLine("- " + band.Key);
+        }
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
+        Console.Clear();
+        ShowMenuOptions();
+    }
+    List<int> ratings = bands[bandName];
+    if (ratings.Count == 0)
+    {
+        Console.WriteLine($"Band {bandName} has no ratings yet.");
+    }
+    else
+    {
+        double averageRating = ratings.Average();
+        Console.WriteLine($"The average rating for band {bandName} is {averageRating:F2}");
+    }
+    Console.WriteLine("\nPress any key to return to the menu...");
+    Console.ReadKey();
+    Console.Clear();
+    ShowMenuOptions();
+}
+
 void ShowTitleOptions(string title)
 {
     int titleLength = title.Length;
